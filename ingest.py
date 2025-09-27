@@ -56,3 +56,5 @@ if __name__ == "__main__":
     parser.add_argument("--source", default="internal", help="Source label for references")
     args = parser.parse_args()
     asyncio.run(main(args.path, args.source))
+    python app/ingest.py --path ../docs --source "internal"
+
