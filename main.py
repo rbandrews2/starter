@@ -140,3 +140,7 @@ async def ai_ask(payload: AskPayload):
     refs = [x for x in refs if not (x in seen or seen.add(x))]
 
     return AiAnswer(answer=answer_text, references=refs, data=live)
+
+cd server
+pip install -r requirements.txt
+cp .env.example .env   # fill OPENAI_API_KEY + PG_DSN
