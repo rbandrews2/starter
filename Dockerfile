@@ -1,12 +1,4 @@
-# Simple Docker build for the API
-FROM python:3.11-slim
-
-WORKDIR /app
-COPY server/requirements.txt /app/requirements.txt
-RUN pip install --no-cache-dir -r /app/requirements.txt
-
-COPY server /app
-ENV PORT=10000
-EXPOSE 10000
-
-CMD ["uvicorn", "app.main:app", "--host", "0.0.0.0", "--port", "10000"]
+docker run --name pg -e POSTGRES_PASSWORD=postgres -p 5432:5432 -d postgres:16
+docker exec -it pg psql -U postgres -c "CREATE DATABASE superiorai;"
+docker exec -it pg psql -U postgres -d superiorai -c "CREATE EXTENSION IF NOT EXISTS vector;"
+psql postgresql://postgres:postgres@localhost:5432/superiorai -f server/db.sql
